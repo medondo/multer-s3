@@ -1,7 +1,7 @@
 import * as AWS from "aws-sdk";
 import multer from "multer";
 
-export interface Options {
+interface Options {
   s3: AWS.S3;
   bucket: ((req: Express.Request, file: Express.Multer.File, callback: (error: any, bucket?: string) => void) => void) | string;
   key?(req: Express.Request, file: Express.Multer.File, callback: (error: any, key?: string) => void): void;
@@ -52,7 +52,7 @@ declare global {
   }
 }
 
-export interface S3StorageTransforms {
+interface S3StorageTransforms {
   (options?: Options): multer.StorageEngine;
 
   AUTO_CONTENT_TYPE(req: Express.Request, file: Express.Multer.File, callback: (error: any, mime?: string, stream?: NodeJS.ReadableStream) => void): void;
@@ -60,4 +60,4 @@ export interface S3StorageTransforms {
 }
 
 declare const s3Storage: S3StorageTransforms;
-export default s3Storage;
+export = s3Storage;
